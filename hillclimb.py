@@ -1,7 +1,5 @@
 import numpy
-from numpy import asarray
-from numpy.random import randn
-from numpy.random import rand
+from numpy.random import randn, rand
 
 
 class HillClimb:
@@ -26,19 +24,21 @@ class HillClimb:
         return [solution, solution_eval, solutions]
 
 
-# objective function
+# objective/fitness function
 # takes args with arg_count of variables/coefficients
 # return a single int/float
 def fitness(solution):
     return numpy.sum((solution[0]**2.0)**(solution[1]**2.0))
 
 # solution with correct number of variables as input
-# return one candidate solution with correct number of variables
+# utilize some random generation function + a step variable
+# return one candidate solution
 def generator(solution):
+    step = 0.005
     candidate = []
     for arg in range(2):
-        candidate.append(solution[arg] + randn() * 0.005)
-    candidate = asarray(candidate)
+        candidate.append(solution[arg] + randn() * step)
+    candidate = numpy.asarray(candidate)
     return candidate
 
 if __name__ == "__main__":
